@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
     "start": "webpack serve --open --config webpack.dev.js",
-    "github": "git subtree push --prefix dist origin gh-pages"
+    "gh-push": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "ValerioL94",
