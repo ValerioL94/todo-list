@@ -1,0 +1,212 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 30px;
+    gap: 30px;
+    background-color: lightblue;
+    align-items: center;
+}
+
+#arrow {
+    border: solid black;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+main {
+    display: flex;
+    height: 100%;
+}
+
+.hide-sidebar>#sidebar {
+    display: none;
+}
+
+#sidebar {
+    background-color: rgb(240, 240, 240);
+    padding: 30px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 60px;
+}
+
+#sidebar>.tabs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#sidebar>.tabs-wrapper>.tab {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 20px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid white;
+}
+
+.tabs-wrapper>.tab>img {
+    height: 50px;
+}
+
+#sidebar>div>.tab:hover {
+    cursor: pointer;
+    border: 3px solid lightblue;
+}
+
+#sidebar>div>.tab:focus {
+    background-color: lightblue;
+    border: 3px solid lightblue;
+}
+
+#sidebar>.projects {
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar>.projects>.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.projects button {
+    border: none;
+    appearance: none;
+    background-color: inherit;
+}
+
+.projects button>img {
+    height: 20px;
+}
+
+.projects button:hover,
+.projects button:focus {
+    cursor: pointer;
+    transition: all ease-in-out;
+    transform: scale(1.2);
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before {
+    background-color: white;
+    border: 2px solid lightblue;
+    border-radius: 5px;
+    width: 130px;
+    content: attr(data-title);
+    visibility: hidden;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px 0;
+    position: absolute;
+    bottom: 120%;
+    right: 0;
+    z-index: 1;
+}
+
+.tooltip::after {
+    position: absolute;
+    left: 50%;
+    bottom: 85%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: lightblue transparent transparent transparent;
+    content: "";
+    visibility: hidden;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+    visibility: visible;
+}
+
+#new-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#new-projects>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 3px solid white;
+    box-sizing: border-box;
+}
+
+#new-projects>div:hover {
+    cursor: pointer;
+    border: 3px solid;
+    border-color: lightblue;
+}
+
+#new-projects>div:focus {
+    border: 3px solid;
+    border-color: lightblue;
+    background-color: lightblue;
+}
+
+#content {
+    width: 100%
+}
+
+footer {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+footer>a>img {
+    height: 25px;
+}
+
+footer>a>img:hover {
+    transition: all ease-in-out;
+    transform: scale(1.2);
+}
+
+@media screen and (max-width: 600px) {
+    #sidebar {
+        position: fixed;
+        z-index: 1;
+    }
+}
