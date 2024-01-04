@@ -208,5 +208,6 @@ footer>a>img:hover {
     #sidebar {
         position: fixed;
         z-index: 1;
+        height: 82.5%;
     }
 }
