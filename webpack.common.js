@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/index.js',
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'todo-list',
+            title: 'Todo list',
         }),
     ],
     output: {
