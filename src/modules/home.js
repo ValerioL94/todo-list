@@ -25,7 +25,6 @@ function createHome() {
 
     const all_tab = document.createElement("div");
     all_tab.setAttribute("class", "all tab");
-    all_tab.setAttribute("tabIndex", "0");
     const all_tabImg = document.createElement("img");
     all_tabImg.src = "images/calendar.png";
     all_tabImg.alt = "calendar icon";
@@ -35,7 +34,6 @@ function createHome() {
 
     const today_tab = document.createElement("div");
     today_tab.setAttribute("class", "today tab");
-    today_tab.setAttribute("tabIndex", "1");
     const today_tabImg = document.createElement("img");
     today_tabImg.src = "images/today.png";
     today_tabImg.alt = "checked calendar icon";
@@ -45,7 +43,6 @@ function createHome() {
 
     const week_tab = document.createElement("div");
     week_tab.setAttribute("class", "week tab");
-    week_tab.setAttribute("tabIndex", "2");
     const week_tabImg = document.createElement("img");
     week_tabImg.src = "images/timeline-week.png";
     week_tabImg.alt = "calendar with a timeline icon";
