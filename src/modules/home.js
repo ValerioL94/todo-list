@@ -24,7 +24,7 @@ function createHome() {
     tabs_wrapper.setAttribute("class", "tabs-wrapper");
 
     const all_tab = document.createElement("div");
-    all_tab.setAttribute("class", "all tab");
+    all_tab.setAttribute("class", "all tab selected");
     const all_tabImg = document.createElement("img");
     all_tabImg.src = "images/calendar.png";
     all_tabImg.alt = "calendar icon";

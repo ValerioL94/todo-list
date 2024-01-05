@@ -30,7 +30,6 @@ const handlers = (() => {
                 el.classList.add("selected");
             });
         });
-
     }
     return {
         toggleSidebar,
