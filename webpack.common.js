@@ -5,8 +5,8 @@ module.exports = {
     entry: './src/index.js',
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'To Do',
             favicon: 'src/images/double-tick.png',
+            template: './src/template.html',
         }),
     ],
     output: {

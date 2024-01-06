@@ -79,14 +79,14 @@ main {
     height: 50px;
 }
 
-.tabs-wrapper>.tab:hover {
+.tab:hover {
     cursor: pointer;
     border: 3px solid lightblue;
 }
 
-.tabs-wrapper>.tab.selected {
-    background-color: lightblue;
-    border: 3px solid lightblue;
+.tab.selected {
+    background-color: lightblue !important;
+    border: 3px solid lightblue !important;
 }
 
 #sidebar>.projects {
@@ -174,12 +174,6 @@ main {
     cursor: pointer;
     border: 3px solid;
     border-color: lightblue;
-}
-
-#new-projects>div:focus {
-    border: 3px solid;
-    border-color: lightblue;
-    background-color: lightblue;
 }
 
 #content {

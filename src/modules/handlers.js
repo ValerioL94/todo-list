@@ -31,6 +31,10 @@ const handlers = (() => {
             });
         });
     }
+    // function addProject() {
+    //     const 
+    // }
+
     return {
         toggleSidebar,
         selected,
