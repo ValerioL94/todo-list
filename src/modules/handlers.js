@@ -1,19 +1,22 @@
+import projects from './projects.js'
+import dom from './dom.js'
+
 const handlers = (() => {
     function toggleSidebar() {
-        const main = document.querySelector("main");
         const arrowBtn = document.getElementById("arrow");
-        arrowBtn.addEventListener("click", updateClass);
-        arrowBtn.addEventListener("click", updateArrowBtn);
-
-        function updateClass() {
+        arrowBtn.addEventListener("click", () => {
+            hideSidebar();
+            flipArrow();
+        });
+        function hideSidebar() {
+            const main = document.querySelector("main");
             if (main.className == "") {
                 main.className = "hide-sidebar";
             } else {
                 main.className = "";
             }
         }
-
-        function updateArrowBtn() {
+        function flipArrow() {
             if (arrowBtn.className == "down") {
                 arrowBtn.className = "right";
             } else {
@@ -31,13 +34,36 @@ const handlers = (() => {
             });
         });
     }
-    // function addProject() {
-    //     const 
-    // }
+
+    function projectModal() {
+        const dialog = document.getElementById("dialog");
+        const newProject = document.getElementById("newProject");
+        const addProject = document.getElementById("addProject");
+        const projectTitle = document.getElementById("projectTitle");
+        const cancelProject = document.getElementById("cancelProject");
+
+        newProject.addEventListener("click", () => {
+            dialog.showModal();
+        });
+        addProject.addEventListener("click", () => {
+            if (projectTitle.value != "") {
+                projects.pushProject(projectTitle.value);
+                dialog.close();
+                projectTitle.value = "";
+                dom.displayProject();
+                selected();
+            } else alert("Please enter a title");
+        });
+        cancelProject.addEventListener("click", () => {
+            dialog.close();
+            projectTitle.value = "";
+        })
+    }
 
     return {
         toggleSidebar,
         selected,
+        projectModal,
     }
 })()
 

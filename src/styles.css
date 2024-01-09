@@ -18,6 +18,7 @@ header {
     padding-left: 30px;
     gap: 30px;
     background-color: lightblue;
+    border-bottom: 3px solid lightsteelblue;
     align-items: center;
 }
 
@@ -39,6 +40,7 @@ header {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
+
 
 main {
     display: flex;
@@ -69,10 +71,11 @@ main {
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    padding-left: 5px;
     gap: 20px;
     background-color: white;
     border-radius: 10px;
-    border: 3px solid white;
+    border: 3px solid whitesmoke;
 }
 
 .tabs-wrapper>.tab>img {
@@ -81,12 +84,12 @@ main {
 
 .tab:hover {
     cursor: pointer;
-    border: 3px solid lightblue;
+    border: 3px solid lightsteelblue !important;
 }
 
 .tab.selected {
     background-color: lightblue !important;
-    border: 3px solid lightblue !important;
+    border: 3px solid lightsteelblue !important;
 }
 
 #sidebar>.projects {
@@ -110,11 +113,14 @@ main {
     height: 20px;
 }
 
-.projects button:hover,
-.projects button:focus {
+.projects button:hover {
     cursor: pointer;
     transition: all ease-in-out;
     transform: scale(1.2);
+}
+
+button.tooltip>img {
+    height: 30px;
 }
 
 .tooltip {
@@ -123,15 +129,15 @@ main {
 
 .tooltip::before {
     background-color: white;
-    border: 2px solid lightblue;
+    border: 2px solid lightsteelblue;
     border-radius: 5px;
-    width: 130px;
+    width: 100px;
     content: attr(data-title);
     visibility: hidden;
     font-family: 'Courier New', Courier, monospace;
-    padding: 5px 0;
+    padding: 3px;
     position: absolute;
-    bottom: 120%;
+    bottom: 115%;
     right: 0;
     z-index: 1;
 }
@@ -140,10 +146,9 @@ main {
     position: absolute;
     left: 50%;
     bottom: 85%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: lightblue transparent transparent transparent;
+    margin-left: -6px;
+    border: 6px solid;
+    border-color: lightsteelblue transparent transparent transparent;
     content: "";
     visibility: hidden;
 }
@@ -166,14 +171,8 @@ main {
     background-color: white;
     padding-left: 10px;
     border-radius: 10px;
-    border: 3px solid white;
+    border: 3px solid whitesmoke;
     box-sizing: border-box;
-}
-
-#new-projects>div:hover {
-    cursor: pointer;
-    border: 3px solid;
-    border-color: lightblue;
 }
 
 #content {
@@ -182,6 +181,7 @@ main {
 
 footer {
     background-color: lightblue;
+    border-top: 3px solid lightsteelblue;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -202,6 +202,6 @@ footer>a>img:hover {
     #sidebar {
         position: fixed;
         z-index: 1;
-        height: 82.5%;
+        height: 81.7%;
     }
 }
