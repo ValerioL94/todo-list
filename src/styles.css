@@ -158,6 +158,59 @@ button.tooltip>img {
     visibility: visible;
 }
 
+#dialog {
+    width: 300px;
+    height: 200px;
+    border: 5px solid lightsteelblue;
+    border-radius: 5px;
+    padding: 0;
+}
+
+#dialog>.wrapper>.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 50px;
+    border-bottom: 3px solid;
+    border-color: lightsteelblue;
+    background-color: lightblue;
+}
+
+#dialog>.wrapper>.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+#dialog>.wrapper>.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    padding-right: 25px;
+    gap: 20px;
+    height: 50px;
+    border-top: 3px solid;
+    border-color: lightsteelblue;
+    background-color: lightblue;
+}
+
+#dialog>.wrapper>.footer>button {
+    border: 3px solid lightsteelblue;
+    border-radius: 10px;
+    height: 30px;
+}
+
+#addProject {
+    background-color: greenyellow;
+}
+
+#cancelProject {
+    background-color: rgb(255, 130, 130);
+}
+
 #new-projects {
     display: flex;
     flex-direction: column;

@@ -16,11 +16,13 @@ const dom = (() => {
             const editImg = document.createElement("img");
             editImg.src = "/images/edit.png";
             editImg.alt = "pen and paper icon";
+            editImg.title = "Edit";
             const deleteBtn = document.createElement("button");
             deleteBtn.type = "button";
             const deleteImg = document.createElement("img");
             deleteImg.src = "/images/delete.png";
             deleteImg.alt = "trash bin icon"
+            deleteImg.title = "Delete";
 
             newProjects.appendChild(project);
             project.append(projectH3, btnWrapper);
