@@ -7,7 +7,8 @@ const dom = (() => {
     function displayProject() {
         projects.projectsList.forEach((el, index) => {
             const project = document.createElement("div");
-            project.setAttribute("class", `project${index} tab`);
+            project.setAttribute("class", "project tab");
+            project.setAttribute("data-id", `${index}`);
             const projectH3 = document.createElement("h3");
             projectH3.textContent = `${el.title}`;
             const btnWrapper = document.createElement("div");

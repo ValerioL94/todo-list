@@ -45,14 +45,24 @@ const handlers = (() => {
         newProject.addEventListener("click", () => {
             dialog.showModal();
         });
+        projectTitle.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                addProject.click();
+            }
+        })
         addProject.addEventListener("click", () => {
-            if (projectTitle.value != "") {
+            const title = projectTitle.value;
+            if (title === "") alert("Please enter a title");
+            else if (projects.projectsList.some(element => element.title === title)) {
+                alert("Project already exists");
+            } else {
                 projects.pushProject(projectTitle.value);
                 dialog.close();
                 projectTitle.value = "";
                 dom.displayProject();
                 selected();
-            } else alert("Please enter a title");
+            }
         });
         cancelProject.addEventListener("click", () => {
             dialog.close();

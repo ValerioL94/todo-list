@@ -7,7 +7,6 @@ const projects = (() => {
             this.tasks = [];
         }
     }
-
     function pushProject(title) {
         const project = new Project(title);
         projectsList.push(project);
@@ -15,7 +14,6 @@ const projects = (() => {
     function editProject(title, index) {
         projectsList[index].title = title;
     }
-
     function removeProject(index) {
         projectsList.splice(index, 1);
     }
