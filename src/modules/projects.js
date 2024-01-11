@@ -1,28 +1,40 @@
-const projects = (() => {
-    let projectsList = [];
+import dom from "./dom";
 
+const projects = (() => {
     class Project {
-        constructor(title) {
+        constructor(title, id) {
             this.title = title;
             this.tasks = [];
+            this.id = id;
         }
     }
-    function pushProject(title) {
-        const project = new Project(title);
+    const projectsList = [];
+
+    function createProject(title) {
+        let id = projectsList.length;
+        let project = new Project(title, id);
         projectsList.push(project);
+        dom.displayProject(project);
     }
     function editProject(title, index) {
         projectsList[index].title = title;
     }
-    function removeProject(index) {
+    function deleteProject(index) {
         projectsList.splice(index, 1);
+        assignId();
+    }
+    function assignId() {
+        projectsList.forEach((el, i) => {
+            el.id = i;
+        })
     }
 
     return {
         projectsList,
-        pushProject,
+        createProject,
         editProject,
-        removeProject,
+        deleteProject,
+        assignId,
     }
 })()
 

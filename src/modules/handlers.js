@@ -38,8 +38,8 @@ const handlers = (() => {
     function projectModal() {
         const dialog = document.getElementById("dialog");
         const newProject = document.getElementById("newProject");
-        const addProject = document.getElementById("addProject");
         const projectTitle = document.getElementById("projectTitle");
+        const addProject = document.getElementById("addProject");
         const cancelProject = document.getElementById("cancelProject");
 
         newProject.addEventListener("click", () => {
@@ -57,11 +57,9 @@ const handlers = (() => {
             else if (projects.projectsList.some(element => element.title === title)) {
                 alert("Project already exists");
             } else {
-                projects.pushProject(projectTitle.value);
+                projects.createProject(title);
                 dialog.close();
                 projectTitle.value = "";
-                dom.displayProject();
-                selected();
             }
         });
         cancelProject.addEventListener("click", () => {
