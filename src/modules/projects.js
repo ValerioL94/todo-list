@@ -1,5 +1,3 @@
-import dom from "./dom";
-
 const projects = (() => {
     class Project {
         constructor(title) {
@@ -7,18 +5,23 @@ const projects = (() => {
             this.tasks = [];
         }
     }
-    const projectsList = [];
+    const test1 = new Project("test1");
+    const test2 = new Project("test2");
+    const test3 = new Project("test3");
+
+    const projectsList = [test1, test2, test3];
+
+
     function createProject(title) {
         let project = new Project(title);
         projectsList.push(project);
-        dom.displayProject(project);
     }
     function editProject(newTitle, oldTitle) {
         let index = projectsList.findIndex(el => el.title === oldTitle);
         projectsList[index].title = newTitle;
     }
-    function deleteProject(project) {
-        let index = projectsList.findIndex(el => el.title === project);
+    function deleteProject(title) {
+        let index = projectsList.findIndex(el => el.title === title);
         projectsList.splice(index, 1);
     }
 
