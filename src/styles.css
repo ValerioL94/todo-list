@@ -180,6 +180,10 @@ button.tooltip>img {
     height: 100px;
 }
 
+input#projectTitle {
+    padding: 5px;
+}
+
 #dialog>.wrapper>.footer {
     display: flex;
     justify-content: flex-end;
@@ -199,11 +203,11 @@ button.tooltip>img {
     height: 30px;
 }
 
-#addProject {
+#projectConfirm {
     background-color: greenyellow;
 }
 
-#cancelProject {
+#projectCancel {
     background-color: rgb(255, 130, 130);
 }
 

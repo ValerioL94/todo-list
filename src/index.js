@@ -10,5 +10,5 @@ importAll(require.context('/src/images', false, /\.(png|svg|jpg|jpeg|gif)$/));
     handlers.toggleSidebar();
     handlers.selected();
     handlers.projectModal();
-    dom.displayProjectsList();
+    // dom.displayProjectsList();
 })();
