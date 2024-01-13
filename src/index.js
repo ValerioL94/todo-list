@@ -1,4 +1,5 @@
 import dom from './modules/dom.js';
+import './styles.css';
 
 function importAll(r) {
     r.keys().forEach(r)
