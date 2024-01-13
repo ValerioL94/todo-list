@@ -2,31 +2,24 @@ import dom from "./dom";
 
 const projects = (() => {
     class Project {
-        constructor(title, id) {
+        constructor(title) {
             this.title = title;
             this.tasks = [];
-            this.id = id;
         }
     }
     const projectsList = [];
-
     function createProject(title) {
-        let id = projectsList.length;
-        let project = new Project(title, id);
+        let project = new Project(title);
         projectsList.push(project);
         dom.displayProject(project);
     }
-    function editProject(title, index) {
-        projectsList[index].title = title;
+    function editProject(newTitle, oldTitle) {
+        let index = projectsList.findIndex(el => el.title === oldTitle);
+        projectsList[index].title = newTitle;
     }
-    function deleteProject(index) {
+    function deleteProject(project) {
+        let index = projectsList.findIndex(el => el.title === project);
         projectsList.splice(index, 1);
-        assignId();
-    }
-    function assignId() {
-        projectsList.forEach((el, i) => {
-            el.id = i;
-        })
     }
 
     return {
@@ -34,7 +27,6 @@ const projects = (() => {
         createProject,
         editProject,
         deleteProject,
-        assignId,
     }
 })()
 
