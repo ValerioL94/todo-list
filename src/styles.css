@@ -211,13 +211,13 @@ input#projectTitle {
     background-color: rgb(255, 130, 130);
 }
 
-#new-projects {
+#newProjects {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#new-projects>div {
+#newProjects>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
