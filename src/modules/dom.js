@@ -156,13 +156,13 @@ const dom = (() => {
         editBtn.type = "button";
         editBtn.setAttribute("class", "editProject");
         const editImg = document.createElement("img");
-        editImg.src = "/images/edit.png";
+        editImg.src = "images/edit.png";
         editImg.alt = "pen and paper icon";
         const deleteBtn = document.createElement("button");
         deleteBtn.type = "button";
         deleteBtn.setAttribute("class", "deleteProject");
         const deleteImg = document.createElement("img");
-        deleteImg.src = "/images/delete.png";
+        deleteImg.src = "images/delete.png";
         deleteImg.alt = "trash bin icon"
 
         newProjects.appendChild(project);
