@@ -25,32 +25,34 @@ const handlers = (() => {
         }
     }
     function selected() {
-        const tabs = document.querySelectorAll(".tab");
-        tabs.forEach(el => {
-            el.addEventListener("click", () => {
-                const selectedEl = document.querySelector(".selected");
-                if (selectedEl) selectedEl.classList.remove("selected");
-                el.classList.add("selected");
-            });
-        });
+        const nav = document.querySelector("nav");
+        nav.addEventListener("click", (event) => {
+            const tab = event.target.closest(".tab");
+            const selectedEL = document.querySelector(".selected");
+            if (!tab) return;
+            if (selectedEL) selectedEL.classList.remove("selected");
+            tab.classList.add("selected");
+        })
     }
 
     function projectModal() {
         const dialog = document.getElementById("dialog");
         const newProject = document.getElementById("newProject");
         const projectTitle = document.getElementById("projectTitle");
-        const addProject = document.getElementById("addProject");
-        const cancelProject = document.getElementById("cancelProject");
+        const addProject = document.getElementById("projectConfirm");
+        const cancelProject = document.getElementById("projectCancel");
 
         newProject.addEventListener("click", () => {
+            dialog.className = "newProject";
+            dom.modalType("add");
             dialog.showModal();
         });
-        projectTitle.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                addProject.click();
-            }
-        })
+        // projectTitle.addEventListener("keydown", (event) => {
+        //     if (event.key === "Enter") {
+        //         event.preventDefault();
+        //         addProject.click();
+        //     }
+        // })
         addProject.addEventListener("click", () => {
             const title = projectTitle.value;
             if (title === "") alert("Please enter a title");
