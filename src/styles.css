@@ -60,7 +60,7 @@ main {
 #sidebar>.tabs-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
 
 .tabs-wrapper>.tab {
@@ -99,17 +99,21 @@ main {
     justify-content: space-between;
 }
 
-.projects button {
+.projects button,
+#newTaskBtn {
     border: none;
     appearance: none;
     background-color: inherit;
 }
 
-.projects button>img {
+.editProject>img,
+.deleteProject>img {
     height: 20px;
 }
 
-.projects button:hover {
+.projects button:hover,
+#newTaskBtn:hover,
+.taskButtons>button:hover {
     cursor: pointer;
     transition: all ease-in-out;
     transform: scale(1.2);
@@ -133,7 +137,7 @@ button.tooltip>img {
     font-family: 'Courier New', Courier, monospace;
     padding: 3px;
     position: absolute;
-    bottom: 115%;
+    bottom: 110%;
     right: 0;
     z-index: 1;
 }
@@ -141,7 +145,7 @@ button.tooltip>img {
 .tooltip::after {
     position: absolute;
     left: 50%;
-    bottom: 85%;
+    bottom: 80%;
     margin-left: -6px;
     border: 6px solid;
     border-color: lightsteelblue transparent transparent transparent;
@@ -180,7 +184,7 @@ button.tooltip>img {
     height: 100px;
 }
 
-input#projectTitle {
+#projectTitle {
     padding: 5px;
 }
 
@@ -214,7 +218,7 @@ input#projectTitle {
 #newProjects {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 #newProjects>div {
@@ -229,7 +233,87 @@ input#projectTitle {
 }
 
 #content {
-    width: 100%
+    width: 100%;
+    padding: 30px;
+}
+
+#content>.wrapper {
+    max-width: 800px;
+    margin: auto;
+}
+
+#content>.wrapper>.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#content>.wrapper>.header>img {
+    height: 50px;
+}
+
+#tasksHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#newTaskBtn>img {
+    height: 30px;
+}
+
+#content>.wrapper>.main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#newTasks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#newTasks>.task {
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priorityLow {
+    border: 2px solid green;
+}
+
+.priorityMedium {
+    border: 2px solid gold;
+}
+
+.priorityHigh {
+    border: 2px solid red;
+}
+
+.taskDetails {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.taskButtons {
+    display: flex;
+}
+
+.taskButtons>button {
+    border: none;
+    appearance: none;
+    background-color: inherit;
+}
+
+.taskButtons>button>img {
+    height: 20px;
 }
 
 footer {
@@ -253,7 +337,9 @@ footer>a>img:hover {
 
 @media screen and (max-width: 600px) {
     #sidebar {
-        /* position: fixed; */
+        position: fixed;
         z-index: 1;
+        height: 82.5%;
+        overflow: auto;
     }
 }
