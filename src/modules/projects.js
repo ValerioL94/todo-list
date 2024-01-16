@@ -5,15 +5,17 @@ const projects = (() => {
             this.tasks = [];
         }
     }
-    const test1 = new Project("test1");
-    const test2 = new Project("test2");
-    const test3 = new Project("test3");
+    const test1 = new Project("Test1");
+    const test2 = new Project("Test2");
+    const test3 = new Project("Test3");
 
     const projectsList = [test1, test2, test3];
 
-
     function createProject(title) {
         let project = new Project(title);
+        pushProject(project);
+    }
+    function pushProject(project) {
         projectsList.push(project);
     }
     function editProject(newTitle, oldTitle) {
