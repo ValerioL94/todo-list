@@ -94,6 +94,7 @@ const dom = (() => {
                 displayProject(title);
                 dialog.close();
                 projectTitle.value = "";
+                projectsCount();
             }
         };
         function editProject() {
@@ -115,6 +116,7 @@ const dom = (() => {
             currentProject.remove();
             dialog.close();
             projectTitle.value = "";
+            projectsCount();
         }
 
         function modalType(value) {
@@ -143,6 +145,7 @@ const dom = (() => {
 
     function displayProjectsList() {
         projects.projectsList.forEach(el => displayProject(el.title));
+        projectsCount();
     }
 
     function displayProject(title) {
@@ -157,7 +160,7 @@ const dom = (() => {
         editBtn.setAttribute("class", "editProject");
         const editImg = document.createElement("img");
         editImg.src = "images/edit.png";
-        editImg.alt = "pen and paper icon";
+        editImg.alt = "pen writing on paper icon";
         const deleteBtn = document.createElement("button");
         deleteBtn.type = "button";
         deleteBtn.setAttribute("class", "deleteProject");
@@ -171,9 +174,19 @@ const dom = (() => {
         editBtn.appendChild(editImg);
         deleteBtn.appendChild(deleteImg);
     }
+
+    function projectsCount() {
+        const projectsCount = document.getElementById("projectsCount");
+        projectsCount.textContent = `(${projects.projectsList.length})`;
+    }
+
+    function displayTask() {
+
+    }
+
+
     return {
         initPage,
-        displayProject,
         displayProjectsList,
     }
 })()
