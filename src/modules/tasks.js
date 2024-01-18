@@ -11,10 +11,10 @@ const tasks = (() => {
             this.completed = false;
         }
     }
-    function createTask(title, description, dueDate, priority, projectTitle) {
+
+    function createTask(title, description, dueDate, priority, projectIndex) {
         let task = new Task(title, description, dueDate, priority);
-        let index = projects.projectsList.findIndex(el => el.title === projectTitle)
-        pushTask(index, task);
+        pushTask(projectIndex, task);
     }
     function pushTask(index, task) {
         projects.projectsList[index].tasks.push(task);
