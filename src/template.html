@@ -17,44 +17,46 @@
     <main>
       <nav id="sidebar" class="hide-sidebar">
         <div class="tabs-wrapper">
-          <div class="all tab selected" tabindex="0">
+          <div id="allTab" class="project tab selected" tabindex="0">
             <img src="images/calendar.png" alt="calendar icon">
             <h2>All</h2>
           </div>
-          <div class="today tab" tabindex="0">
+          <div id="todayTab" class="project tab" tabindex="0">
             <img src="images/today.png" alt="calendar with check icon">
             <h2>Today</h2>
           </div>
-          <div class="week tab" tabindex="0">
+          <div id="weekTab" class="project tab" tabindex="0">
             <img src="images/timeline-week.png" alt="calendar with timeline icon">
             <h2>Week</h2>
           </div>
         </div>
         <div class="projects">
           <div class="header">
-            <h2>Projects</h2>
-            <span id="projectsCount"></span>
+            <div>
+              <h2>Projects</h2>
+              <span id="projectsCount"></span>
+            </div>
             <button type="button" id="newProjectBtn" class="tooltip" data-title="New project">
               <img src="images/add.png" alt="plus icon">
             </button>
-            <dialog id="dialog">
-              <div class="wrapper">
-                <div class="header">
-                  <h2 id="dialogTitle"></h2>
-                </div>
-                <div class="main">
-                  <form method="dialog">
-                    <label for="projectTitle">Title:</label>
-                    <input type="text" id="projectTitle">
-                  </form>
-                </div>
-                <div class="footer">
-                  <button id="projectConfirm" type="button"></button>
-                  <button id="projectCancel" type="button">Cancel</button>
-                </div>
-              </div>
-            </dialog>
           </div>
+          <dialog id="projectDialog">
+            <div class="wrapper">
+              <div class="header">
+                <h2 id="dialogTitle"></h2>
+              </div>
+              <div class="main">
+                <form id="projectForm" method="dialog">
+                  <label for="projectTitle">Title:</label>
+                  <input type="text" id="projectTitle">
+                </form>
+              </div>
+              <div class="footer">
+                <button id="projectConfirm" type="button"></button>
+                <button id="projectCancel" type="button">Cancel</button>
+              </div>
+            </div>
+          </dialog>
           <div id="newProjects">
           </div>
         </div>
@@ -62,12 +64,15 @@
       <div id="content">
         <div class="wrapper">
           <div class="header">
-            <img src="images/project.png" alt="pen and paper">
-            <h1 id="tabTitle">Test1</h1>
+            <img id="tabIcon">
+            <h1 id="tabTitle"></h1>
           </div>
           <div class="main">
             <div id="tasksHeader">
-              <h2 id="tasksCount">Tasks (3)</h2>
+              <div>
+                <h2>Tasks</h2>
+                <span id="tasksCount"></span>
+              </div>
               <button type="button" id="newTaskBtn">
                 <img src="images/add.png" alt="plus icon">
               </button>
@@ -75,6 +80,43 @@
             <div id="newTasks">
 
             </div>
+            <dialog id="taskDialog">
+              <div class="wrapper">
+                <div class="header">
+                  <h2 id="taskDialogTitle">New task</h2>
+                </div>
+                <div class="main">
+                  <form id="taskForm" method="dialog">
+                    <ul>
+                      <li>
+                        <label for="taskTitle">Title:</label>
+                        <input type="text" id="taskTitle" size="25">
+                      </li>
+                      <li>
+                        <label for="taskDescription">Description:</label>
+                        <textarea style="resize:none" id="taskDescription" rows="3"></textarea>
+                      </li>
+                      <li>
+                        <label for="taskDate">Due Date:</label>
+                        <input type="date" id="taskDate">
+                      </li>
+                      <li>
+                        <label for="taskPriority">Priority:</label>
+                        <select name="priority" id="taskPriority">
+                          <option value="Low">Low</option>
+                          <option value="Medium">Medium</option>
+                          <option value="High">High</option>
+                        </select>
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+                <div class="footer">
+                  <button id="taskConfirm" type="button">Add</button>
+                  <button id="taskCancel" type="button">Cancel</button>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>
