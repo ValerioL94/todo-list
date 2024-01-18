@@ -1,4 +1,5 @@
 import projects from "./projects";
+import tasks from "./tasks";
 
 const dom = (() => {
     const newProjects = document.getElementById("newProjects");
@@ -24,16 +25,8 @@ const dom = (() => {
             }
         }
 
-        const nav = document.querySelector("nav");
-        nav.addEventListener("click", (event) => {
-            const tab = event.target.closest(".tab");
-            const selectedEL = document.querySelector(".selected");
-            if (!tab) return;
-            if (selectedEL) selectedEL.classList.remove("selected");
-            tab.classList.add("selected");
-        })
-
-        const dialog = document.getElementById("dialog");
+        const projectDialog = document.getElementById("projectDialog");
+        const projectForm = document.getElementById("projectForm");
         const dialogTitle = document.getElementById("dialogTitle");
         const newProjectBtn = document.getElementById("newProjectBtn");
         const projectTitle = document.getElementById("projectTitle");
@@ -44,21 +37,21 @@ const dom = (() => {
         let currentH3;
 
         newProjectBtn.addEventListener("click", () => {
-            modalType("add");
-            dialog.showModal();
+            projectModal("add");
+            projectDialog.showModal();
         })
         newProjects.addEventListener("click", (event) => {
             const button = event.target.closest("button");
-            currentH3 = event.target.closest(".project.tab").querySelector("h3");
-            currentProject = event.target.closest(".project.tab");
             if (!button) return;
+            currentProject = event.target.closest(".project.tab");
+            currentH3 = currentProject.querySelector("h3");
             if (button.className === "editProject") {
-                modalType("edit");
+                projectModal("edit");
             } else if (button.className === "deleteProject") {
-                modalType("delete");
+                projectModal("delete");
             }
             projectTitle.value = currentH3.textContent;
-            dialog.showModal();
+            projectDialog.showModal();
         })
 
         projectTitle.addEventListener("keydown", (event) => {
@@ -74,14 +67,16 @@ const dom = (() => {
             }
             else if (projectConfirm.className === "editBtn") {
                 editProject();
+                currentProject.click();
             }
             else if (projectConfirm.className === "deleteBtn") {
                 deleteProject();
+                allTab.click();
             }
         });
         projectCancel.addEventListener("click", () => {
-            dialog.close();
-            projectTitle.value = "";
+            projectDialog.close();
+            projectForm.reset();
         });
 
         function createProject() {
@@ -92,8 +87,8 @@ const dom = (() => {
             } else {
                 projects.createProject(title);
                 displayProject(title);
-                dialog.close();
-                projectTitle.value = "";
+                projectDialog.close();
+                projectForm.reset();
                 projectsCount();
             }
         };
@@ -105,8 +100,8 @@ const dom = (() => {
                 alert("Project already exists!");
             } else {
                 projects.editProject(newTitle, oldTitle);
-                dialog.close();
-                projectTitle.value = "";
+                projectDialog.close();
+                projectForm.reset();
                 currentH3.textContent = newTitle;
             }
         }
@@ -114,12 +109,12 @@ const dom = (() => {
             const title = projectTitle.value;
             projects.deleteProject(title);
             currentProject.remove();
-            dialog.close();
-            projectTitle.value = "";
+            projectDialog.close();
+            projectForm.reset();
             projectsCount();
         }
 
-        function modalType(value) {
+        function projectModal(value) {
             switch (value) {
                 case "add":
                     dialogTitle.textContent = "New Project";
@@ -141,11 +136,6 @@ const dom = (() => {
                     break;
             }
         }
-    }
-
-    function displayProjectsList() {
-        projects.projectsList.forEach(el => displayProject(el.title));
-        projectsCount();
     }
 
     function displayProject(title) {
@@ -180,14 +170,163 @@ const dom = (() => {
         projectsCount.textContent = `(${projects.projectsList.length})`;
     }
 
-    function displayTask() {
-
+    const nav = document.querySelector("nav");
+    nav.addEventListener("click", (event) => {
+        const projectTab = event.target.closest(".project.tab");
+        if (!projectTab) return;
+        selectTab(projectTab);
+    })
+    function selectTab(tab) {
+        const selectedEL = document.querySelector(".selected");
+        if (selectedEL) selectedEL.classList.remove("selected");
+        tab.classList.add("selected");
     }
 
+    const allTab = document.getElementById("allTab");
+    const todayTab = document.getElementById("todayTab");
+    const weekTab = document.getElementById("weekTab");
+
+    allTab.addEventListener("click", () => {
+        updateTabTitle("All");
+        updateTabIcon("images/calendar.png", "calendar icon");
+
+    })
+    todayTab.addEventListener("click", () => {
+        updateTabTitle("Today");
+        updateTabIcon("images/today.png", "checked calendar icon");
+    })
+    weekTab.addEventListener("click", () => {
+        updateTabTitle("Week");
+        updateTabIcon("images/timeline-week.png", "timeline calendar icon");
+    })
+
+    let currentProject;
+    let currentH3;
+
+    newProjects.addEventListener("click", (event) => {
+        const projectTab = event.target.closest(".project.tab");
+        if (!projectTab) return;
+        currentProject = event.target.closest(".project.tab");
+        currentH3 = currentProject.querySelector("h3");
+        const projectTabTitle = projectTab.querySelector("h3");
+        updateTabTitle(projectTabTitle.textContent);
+        updateTabIcon("images/project.png", "pan and paper icon");
+        tasksCount(projectTabTitle.textContent);
+    })
+
+    function updateTabTitle(newTitle) {
+        const tabTitle = document.getElementById("tabTitle");
+        tabTitle.textContent = newTitle;
+    }
+    function updateTabIcon(icon, text) {
+        const tabIcon = document.getElementById("tabIcon");
+        tabIcon.src = icon;
+        tabIcon.alt = text;
+    }
+
+    function tasksCount(title) {
+        const tasksCount = document.getElementById("tasksCount");
+        let index = projects.projectsList.findIndex(el => el.title === title);
+        tasksCount.textContent = `(${projects.projectsList[index].tasks.length})`;
+    }
+
+    const newTaskBtn = document.getElementById("newTaskBtn");
+    const taskDialog = document.getElementById("taskDialog");
+    const taskConfirm = document.getElementById("taskConfirm");
+    const taskCancel = document.getElementById("taskCancel");
+    const taskForm = document.getElementById("taskForm");
+    const taskTitle = document.getElementById("taskTitle");
+    const taskDescription = document.getElementById("taskDescription");
+    const taskDate = document.getElementById("taskDate");
+    const taskPriority = document.getElementById("taskPriority");
+
+    newTaskBtn.addEventListener("click", () => {
+        taskDialog.showModal();
+    })
+
+    taskConfirm.addEventListener("click", () => {
+        // if (taskConfirm.className === "addBtn") {
+        createTask();
+        // }
+        // else if (taskConfirm.className === "editBtn") {
+        //     editTask();
+        //     currentTask.click();
+        // }
+        // else if (taskConfirm.className === "deleteBtn") {
+        //     deleteTask();
+        // }
+    })
+    taskCancel.addEventListener("click", () => {
+        taskDialog.close();
+        taskForm.reset();
+    });
+    function createTask() {
+        const title = taskTitle.value;
+        const description = taskDescription.value;
+        const date = taskDate.value;
+        const priority = taskPriority.value;
+        let index = projects.projectsList.findIndex(el => el.title === currentH3.textContent);
+        if (title === "") alert("Please enter a title");
+        else if (projects.projectsList[index].tasks.some(element => element.title === title)) {
+            alert("Project already exists!");
+        } else {
+            tasks.createTask(title, description, date, priority, index);
+            displayTask(title, date, priority);
+            tasksCount(currentH3.textContent);
+            taskDialog.close();
+            taskForm.reset();
+        }
+    }
+
+    const newTasks = document.getElementById("newTasks");
+    function displayTask(title, date, priority) {
+        const task = document.createElement("div");
+        task.setAttribute("class", `task priority${priority}`);
+        const titleWrapper = document.createElement("div");
+        titleWrapper.setAttribute("class", "titleWrapper");
+        const taskH3 = document.createElement("h3");
+        taskH3.setAttribute("class", "taskH3");
+        taskH3.textContent = `${title}`;
+        const taskDetails = document.createElement("div");
+        taskDetails.setAttribute("class", "taskDetails");
+        const taskDate = document.createElement("p");
+        taskDate.setAttribute("class", "taskDate");
+        taskDate.textContent = `${date}`;
+        const taskButtons = document.createElement("div");
+        taskButtons.setAttribute("class", "taskButtons");
+        const taskInfo = document.createElement("button");
+        const infoImg = document.createElement("img");
+        infoImg.src = "images/info.png";
+        infoImg.alt = "info icon";
+        const taskEdit = document.createElement("button");
+        const editImg = document.createElement("img");
+        editImg.src = "images/edit.png";
+        editImg.alt = " pen writing on paper icon";
+        const taskDelete = document.createElement("button");
+        const deleteImg = document.createElement("img");
+        deleteImg.src = "images/delete.png";
+        deleteImg.alt = "trash bin icon";
+
+        newTasks.appendChild(task);
+        task.append(titleWrapper, taskDetails);
+        titleWrapper.appendChild(taskH3);
+        taskDetails.append(taskDate, taskButtons);
+        taskButtons.append(taskInfo, taskEdit, taskDelete);
+        taskInfo.appendChild(infoImg);
+        taskEdit.appendChild(editImg);
+        taskDelete.appendChild(deleteImg);
+    }
+
+    function displayProjectsList() {
+        projects.projectsList.forEach(el => displayProject(el.title));
+        projectsCount();
+        allTab.click();
+    }
 
     return {
         initPage,
         displayProjectsList,
+
     }
 })()
 
