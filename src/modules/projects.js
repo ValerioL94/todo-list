@@ -18,12 +18,16 @@ const projects = (() => {
         projectsList.push(project);
     }
     function editProject(newTitle, oldTitle) {
-        let index = projectsList.findIndex(el => el.title === oldTitle);
+        let index = getIndex(oldTitle);
         projectsList[index].title = newTitle;
     }
     function deleteProject(title) {
-        let index = projectsList.findIndex(el => el.title === title);
+        let index = getIndex(title);
         projectsList.splice(index, 1);
+    }
+    function getIndex(title) {
+        let index = projectsList.findIndex(el => el.title === title);
+        return index;
     }
 
     return {
@@ -31,6 +35,7 @@ const projects = (() => {
         createProject,
         editProject,
         deleteProject,
+        getIndex,
     }
 })()
 

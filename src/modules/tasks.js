@@ -23,14 +23,32 @@ const tasks = (() => {
         deleteTask(projectTitle);
         createTask(title, description, dueDate, priority, projectTitle);
     }
-    function deleteTask(projectTitle) {
-        let index = projects.projectsList.findIndex(el => el.title === projectTitle);
-        projects.projectsList[index].tasks.length = 0;
+    function deleteTask(task, project) {
+        let projectIndex = projects.getIndex(project);
+        let taskIndex = getIndex(projectIndex, task);
+        projects.projectsList[projectIndex].tasks.splice(taskIndex, 1);
     }
+
+    function taskCompleted(task, project) {
+        let projectIndex = projects.getIndex(project);
+        let taskIndex = getIndex(projectIndex, task);
+        if (projects.projectsList[projectIndex].tasks[taskIndex].completed === false) {
+            projects.projectsList[projectIndex].tasks[taskIndex].completed = true;
+        } else {
+            projects.projectsList[projectIndex].tasks[taskIndex].completed = false;
+        }
+        console.log(projects.projectsList[projectIndex].tasks[taskIndex]);
+    }
+    function getIndex(projectIndex, title) {
+        let taskIndex = projects.projectsList[projectIndex].tasks.findIndex(el => el.title === title);
+        return taskIndex;
+    }
+
     return {
         createTask,
         editTask,
         deleteTask,
+        taskCompleted,
     }
 })()
 
