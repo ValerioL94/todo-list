@@ -1,22 +1,16 @@
 import projects from "./projects";
 import tasks from "./tasks";
+import { format, parseISO, differenceInDays, getWeek } from 'date-fns';
 
 const dom = (() => {
     const newProjects = document.getElementById("newProjects");
     function initPage() {
         const arrowBtn = document.getElementById("arrow");
+        const main = document.querySelector("main");
         arrowBtn.addEventListener("click", () => {
-            hideSidebar();
+            main.classList.toggle("hide-sidebar");
             flipArrow();
         });
-        function hideSidebar() {
-            const main = document.querySelector("main");
-            if (main.className == "") {
-                main.className = "hide-sidebar";
-            } else {
-                main.className = "";
-            }
-        }
         function flipArrow() {
             if (arrowBtn.className == "down") {
                 arrowBtn.className = "right";
@@ -82,7 +76,7 @@ const dom = (() => {
         function createProject() {
             const title = projectTitle.value;
             if (title === "") alert("Please enter a title");
-            else if (projects.projectsList.some(element => element.title === title)) {
+            else if (projects.projectsList.some(el => el.title === title)) {
                 alert("Project already exists!");
             } else {
                 projects.createProject(title);
@@ -189,15 +183,23 @@ const dom = (() => {
     allTab.addEventListener("click", () => {
         updateTabTitle("All");
         updateTabIcon("images/calendar.png", "calendar icon");
-
+        newTasks.innerHTML = "";
+        newTaskBtn.style.display = "none";
+        displayAllTasks();
     })
     todayTab.addEventListener("click", () => {
         updateTabTitle("Today");
         updateTabIcon("images/today.png", "checked calendar icon");
+        newTasks.innerHTML = "";
+        newTaskBtn.style.display = "none";
+        displayTodayTasks();
     })
     weekTab.addEventListener("click", () => {
         updateTabTitle("Week");
         updateTabIcon("images/timeline-week.png", "timeline calendar icon");
+        newTasks.innerHTML = "";
+        newTaskBtn.style.display = "none";
+        displayWeekTasks();
     })
 
     let currentProject;
@@ -206,14 +208,21 @@ const dom = (() => {
     newProjects.addEventListener("click", (event) => {
         const projectTab = event.target.closest(".project.tab");
         if (!projectTab) return;
-        const projectTabTitle = projectTab.querySelector("h3");
+        const projectTabTitle = projectTab.querySelector("h3").textContent;
         currentProject = event.target.closest(".project.tab");
         currentProjectH3 = currentProject.querySelector("h3");
-        updateTabTitle(projectTabTitle.textContent);
+        updateTabTitle(projectTabTitle);
         updateTabIcon("images/project.png", "pan and paper icon");
-        tasksCount(projectTabTitle.textContent);
-
+        newTaskBtn.style.display = "inline-block";
+        tasksCount(projectTabTitle);
+        displayTasks(projectTabTitle);
     })
+
+    function displayTasks(project) {
+        newTasks.innerHTML = "";
+        let index = projects.getIndex(project);
+        projects.projectsList[index].tasks.forEach(el => displayTask(el.title, el.dueDate, el.priority));
+    }
 
     function updateTabTitle(newTitle) {
         const tabTitle = document.getElementById("tabTitle");
@@ -227,7 +236,7 @@ const dom = (() => {
 
     function tasksCount(title) {
         const tasksCount = document.getElementById("tasksCount");
-        let index = projects.projectsList.findIndex(el => el.title === title);
+        let index = projects.getIndex(title);
         tasksCount.textContent = `(${projects.projectsList[index].tasks.length})`;
     }
 
@@ -269,7 +278,7 @@ const dom = (() => {
         const date = taskDate.value;
         const priority = taskPriority.value;
         const projectH3 = currentProjectH3.textContent;
-        let index = projects.projectsList.findIndex(el => el.title === projectH3);
+        let index = projects.getIndex(projectH3);
         if (title === "") alert("Please enter a title");
         else if (projects.projectsList[index].tasks.some(el => el.title === title)) {
             alert("Project already exists!");
@@ -362,13 +371,60 @@ const dom = (() => {
     function displayProjectsList() {
         projects.projectsList.forEach(el => displayProject(el.title));
         projectsCount();
-        allTab.click();
+    }
+
+    const tasksCounter = document.getElementById("tasksCount");
+    function displayAllTasks() {
+        let allTasks = [];
+        projects.projectsList
+            .forEach(el => el.tasks
+                .forEach(el => allTasks.push(el)));
+        const sortedAllTasks = allTasks.sort(function (a, b) {
+            a = a.dueDate.split("-");
+            b = b.dueDate.split("-");
+            return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+        })
+        sortedAllTasks.forEach(el => displayTask(el.title, el.dueDate, el.priority));
+        tasksCounter.textContent = `(${sortedAllTasks.length})`;
+    }
+
+    const todayDate = format(new Date(), 'yyyy-MM-dd');
+    function displayTodayTasks() {
+        let todayTasks = [];
+        projects.projectsList
+            .forEach(el => el.tasks
+                .forEach(el => el.dueDate === todayDate ? todayTasks.push(el) : ""));
+        todayTasks.forEach(el => displayTask(el.title, el.dueDate, el.priority));
+        tasksCounter.textContent = `(${todayTasks.length})`;
+    }
+
+    function displayWeekTasks() {
+        const date = parseISO(todayDate);
+        let tasks = [];
+        const weekTasks = [];
+        projects.projectsList.
+            forEach(el => el.tasks
+                .forEach(el => tasks.push(el)));
+        for (let i = 0; i < tasks.length; i++) {
+            let parsed = parseISO(tasks[i].dueDate);
+            if (differenceInDays(parsed, date) <= 7 &&
+                differenceInDays(parsed, date) >= 0) {
+                weekTasks.push(tasks[i]);
+            }
+        }
+        const sortedWeekTasks = weekTasks.sort(function (a, b) {
+            a = a.dueDate.split("-");
+            b = b.dueDate.split("-");
+            return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+        })
+        sortedWeekTasks.forEach(el => displayTask(el.title, el.dueDate, el.priority));
+        tasksCounter.textContent = `(${sortedWeekTasks.length})`;
     }
 
     return {
         initPage,
         displayProjectsList,
-
+        allTab,
     }
 })()
 
