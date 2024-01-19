@@ -8,10 +8,21 @@ const tasks = (() => {
             this.description = description
             this.dueDate = dueDate
             this.priority = priority
-            this.completed = false;
+            this.completed = false
         }
     }
 
+    const test1 = new Task("taskTest1", "this is a test", "2024-01-21", "Low");
+    const test2 = new Task("taskTest2", "another test", "2024-01-20", "Medium");
+    const test3 = new Task("taskTest3", "one more test", "2024-01-19", "High");
+    const test4 = new Task("taskTest4", "one last test", "2024-01-18", "Low");
+
+    function test() {
+        pushTask(0, test1);
+        pushTask(1, test2);
+        pushTask(2, test3);
+        pushTask(3, test4);
+    }
     function createTask(title, description, dueDate, priority, projectIndex) {
         let task = new Task(title, description, dueDate, priority);
         pushTask(projectIndex, task);
@@ -37,7 +48,6 @@ const tasks = (() => {
         } else {
             projects.projectsList[projectIndex].tasks[taskIndex].completed = false;
         }
-        console.log(projects.projectsList[projectIndex].tasks[taskIndex]);
     }
     function getIndex(projectIndex, title) {
         let taskIndex = projects.projectsList[projectIndex].tasks.findIndex(el => el.title === title);
@@ -49,6 +59,7 @@ const tasks = (() => {
         editTask,
         deleteTask,
         taskCompleted,
+        test,
     }
 })()
 

@@ -6,9 +6,11 @@ const projects = (() => {
         }
     }
     const test1 = new Project("Test1");
+    const test2 = new Project("Test2");
+    const test3 = new Project("Test3");
+    const test4 = new Project("Test4");
 
-
-    const projectsList = [test1];
+    const projectsList = [test1, test2, test3, test4];
 
     function createProject(title) {
         let project = new Project(title);
