@@ -15,7 +15,7 @@
       <button type="button" id="arrow" class="down"></button>
     </header>
     <main>
-      <nav id="sidebar" class="hide-sidebar">
+      <nav id="sidebar">
         <div class="tabs-wrapper">
           <div id="allTab" class="project tab selected" tabindex="0">
             <img src="images/calendar.png" alt="calendar icon">
@@ -82,7 +82,7 @@
             <dialog id="taskDialog">
               <div class="wrapper">
                 <div class="header">
-                  <h2 id="taskDialogTitle">New task</h2>
+                  <h2 id="taskDialogTitle"></h2>
                 </div>
                 <div class="main">
                   <form id="taskForm" method="dialog">
@@ -107,11 +107,19 @@
                           <option value="High">High</option>
                         </select>
                       </li>
+                      <li id="infoProject">
+                        <label for="taskProject">Project:</label>
+                        <select name="projectsList" id="taskProject"></select>
+                      </li>
+                      <li id="infoCompleted">
+                        <label for="taskCompleted">Completed:</label>
+                        <input type="text" id="taskCompleted">
+                      </li>
                     </ul>
                   </form>
                 </div>
                 <div class="footer">
-                  <button id="taskConfirm" type="button">Add</button>
+                  <button id="taskConfirm" type="button"></button>
                   <button id="taskCancel" type="button">Cancel</button>
                 </div>
               </div>
