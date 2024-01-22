@@ -5,10 +5,10 @@ const projects = (() => {
             this.tasks = [];
         }
     }
-    const test1 = new Project("Test1");
-    const test2 = new Project("Test2");
-    const test3 = new Project("Test3");
-    const test4 = new Project("Test4");
+    const test1 = new Project("Eat healthy");
+    const test2 = new Project("Stay hydrated");
+    const test3 = new Project("Training");
+    const test4 = new Project("Have fun");
 
     const projectsList = [test1, test2, test3, test4];
 
