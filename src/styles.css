@@ -402,8 +402,10 @@ footer>a>img {
     #sidebar {
         position: fixed;
         z-index: 1;
-        height: 82.5%;
+        height: 85%;
         overflow: auto;
+        border: 3px solid lightsteelblue;
+        border-left-width: 0;
     }
 
     #newTasks>.task {
