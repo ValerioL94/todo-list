@@ -277,6 +277,7 @@ const dom = (() => {
             taskDate.classList.toggle("completed");
             let project = taskTab.dataset.project;
             tasks.taskCompleted(taskH3.textContent, project);
+            localStorage.setItem('projects', JSON.stringify(projects.projectsList));
         }
     })
 

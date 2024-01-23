@@ -294,7 +294,7 @@ dialog>.wrapper>.footer>button {
 #newTasks>.task {
     border-radius: 10px;
     padding: 0 10px;
-    height: 40px;
+    min-height: 40px;
     background-color: rgb(240, 240, 240);
     display: flex;
     align-items: center;
@@ -309,7 +309,7 @@ dialog>.wrapper>.footer>button {
 .taskH3.completed::before {
     position: absolute;
     left: -30px;
-    bottom: -10px;
+    top: 0px;
     content: '\2713';
     color: inherit;
     font-size: 3rem;
@@ -410,12 +410,5 @@ footer>a>img {
 
     #newTasks>.task {
         flex-direction: column;
-        height: initial;
-        min-height: 40px;
     }
-
-    .taskH3.completed::before {
-        top: 0px;
-    }
-
 }
