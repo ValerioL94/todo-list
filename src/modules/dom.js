@@ -81,6 +81,7 @@ const dom = (() => {
             else if (projectConfirm.className === "deleteBtn") {
                 deleteProject();
             }
+            localStorage.setItem('projects', JSON.stringify(projects.projectsList));
         });
         projectCancel.addEventListener("click", () => {
             projectDialog.close();
@@ -289,6 +290,7 @@ const dom = (() => {
         else if (taskConfirm.className === "deleteBtn") {
             deleteTask();
         }
+        localStorage.setItem('projects', JSON.stringify(projects.projectsList));
     })
     taskCancel.addEventListener("click", () => {
         taskDialog.close();
@@ -311,6 +313,7 @@ const dom = (() => {
             countTasks(project);
             taskDialog.close();
             taskForm.reset();
+            allTab.click();
         }
     }
     function editTask() {
