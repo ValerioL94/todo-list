@@ -13,17 +13,6 @@ const tasks = (() => {
         }
     }
 
-    const test1 = new Task("Buy healthy food", "Stop eating snacks and pre-packaged stuff, cook your own meals and buy fresh vegetables ", "2024-01-28", "High", "Eat healthy");
-    const test2 = new Task("Drink more water", "Drink more water, 3 liters of water each day may seem a lot but it's not!", "2024-01-25", "Low", "Stay hydrated");
-    const test3 = new Task("Start training", "The hardest part is making a habit of it, you just need to get the ball rolling", "2024-01-22", "Medium", "Training");
-    const test4 = new Task("Have some fun", "Study hard, party hard. Studying and/or working is as important as having fun.", "2024-01-20", "Medium", "Have fun");
-
-    function test() {
-        pushTask(test1, 0);
-        pushTask(test2, 1);
-        pushTask(test3, 2);
-        pushTask(test4, 3);
-    }
     function createTask(title, description, dueDate, priority, project) {
         let task = new Task(title, description, dueDate, priority, project);
         let index = projects.getIndex(project);
@@ -62,8 +51,7 @@ const tasks = (() => {
         editTask,
         deleteTask,
         taskCompleted,
-        getIndex,
-        test,
+        getIndex
     }
 })()
 
