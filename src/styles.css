@@ -405,4 +405,15 @@ footer>a>img {
         height: 82.5%;
         overflow: auto;
     }
+
+    #newTasks>.task {
+        flex-direction: column;
+        height: initial;
+        min-height: 40px;
+    }
+
+    .taskH3.completed::before {
+        top: 0px;
+    }
+
 }
