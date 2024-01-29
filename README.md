@@ -1,5 +1,5 @@
-# <a href="https://valeriol94.github.io/todo-list/">todo-list</a>
-
+# <a href="https://valeriol94.github.io/todo-list/">todo-list</a> <- Live here
+ 
 Building a dynamic todo list with javascript and webpack
 
 Icons from: https://icons8.com/
